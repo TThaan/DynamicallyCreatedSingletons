@@ -16,6 +16,7 @@ namespace DynamicSingletons
     /// where I emit sort of singletons too, so this program is still in the beginning phase.
     /// Hopefully I can finish this exercise very soon.
     /// </summary>
+
     enum TypePresets
     {
         NotThreadSafe,
@@ -31,18 +32,18 @@ namespace DynamicSingletons
         static void Main(string[] args)
         {
             //Build.CustomType:
-            var simpleSingleton01 = Build.CustomType(TypePresets.NotThreadSafe, "s01");
+            var simpleSingleton01 = Builder.CustomType(TypePresets.NotThreadSafe, "s01");
             Console.WriteLine($"singleton01              : {simpleSingleton01}");
             Console.WriteLine($"singleton01.GetType()    : {simpleSingleton01.GetType()}");
             Console.WriteLine($"singleton01.GetTypeInfo(): {simpleSingleton01.GetTypeInfo()}\n");
 
-            //call static method of Type 'singleton'(='s01')
-            MethodInfo method_Static01 = simpleSingleton01.GetMethod("ShowContent_Static");
+            //Check if calling a static method of class 'singleton'(='s01') works (with reflection)
+            MethodInfo method_Static01 = simpleSingleton01.GetMethod("AnyMethod_Static");
             method_Static01.Invoke(simpleSingleton01, null);
             Console.WriteLine();
 
             //Build.InstanceOfCustomType:
-            var simpleSingleton02 = Build.InstanceOfCustomType(TypePresets.NotThreadSafe, "s02");
+            var simpleSingleton02 = Builder.InstanceOfCustomType(TypePresets.NotThreadSafe, "s02");
             Console.WriteLine($"singleton02              : {simpleSingleton02}");
             Console.WriteLine($"singleton02.GetType()    : {simpleSingleton02.GetType()}");
             Console.ReadLine();            

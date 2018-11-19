@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DynamicSingletons
 {
-    class Build
+    class Builder
     {
         static AssemblyBuilder assemblyBuilder;
         static ModuleBuilder moduleBuilder;
@@ -40,8 +40,8 @@ namespace DynamicSingletons
                 FieldBuilder field_instance = GetFieldBuilder(typeBuilder);                                     //wa: = default
                 PropertyBuilder property_Instance = GetPropertyBuilder(typeBuilder, field_instance, constructorBuilder);
 
-                MethodBuilder method_ShowContent_Static = GetMethodBuilder_ShowContent_Static(typeBuilder, typeName);
-                MethodBuilder method_ShowContent_Instance = GetMethodBuilder_ShowContent_Instance(typeBuilder, typeName);
+                MethodBuilder method_AnyMethod_Static = GetMethodBuilder_AnyMethod_Static(typeBuilder, typeName);
+                MethodBuilder method_AnyMethod_Instance = GetMethodBuilder_AnyMethod_Instance(typeBuilder, typeName);
             }            
 
             Type type = typeBuilder.CreateType();
@@ -111,10 +111,10 @@ namespace DynamicSingletons
 
             return methodBuilder;
         }
-        private static MethodBuilder GetMethodBuilder_ShowContent_Static(TypeBuilder typeBuilder, string typeName)
+        private static MethodBuilder GetMethodBuilder_AnyMethod_Static(TypeBuilder typeBuilder, string typeName)
         {
             MethodBuilder methodBuilder = typeBuilder.DefineMethod(
-                "ShowContent_Static",
+                "AnyMethod_Static",
                 MethodAttributes.Public | MethodAttributes.Static,
                 null,
                 Type.EmptyTypes);
@@ -126,10 +126,10 @@ namespace DynamicSingletons
 
             return methodBuilder;
         }
-        private static MethodBuilder GetMethodBuilder_ShowContent_Instance(TypeBuilder typeBuilder, string typeName)
+        private static MethodBuilder GetMethodBuilder_AnyMethod_Instance(TypeBuilder typeBuilder, string typeName)
         {
             MethodBuilder methodBuilder = typeBuilder.DefineMethod(
-                "ShowContent_Instance",
+                "AnyMethod_Instance",
                 MethodAttributes.Public,
                 null,
                 Type.EmptyTypes);
